@@ -182,19 +182,39 @@ const OrderScreen = () => {
 
             <ListGroup.Item>
               <h2>Order Status</h2>
-              <div className="flex items-center justify-between w-full mt-4">
+              <div className='flex items-center justify-between w-full mt-4'>
                 {[
                   { status: 'Ordered', icon: '✔️', completed: true },
                   { status: 'Paid', icon: '💳', completed: order.isPaid },
-                  { status: 'Shipped', icon: '🚚', completed: order.isDelivered },
-                  { status: 'Delivered', icon: '📦', completed: order.isDelivered },
+                  {
+                    status: 'Shipped',
+                    icon: '🚚',
+                    completed: order.isDelivered,
+                  },
+                  {
+                    status: 'Delivered',
+                    icon: '📦',
+                    completed: order.isDelivered,
+                  },
                 ].map((step, index) => (
-                  <div key={step.status} className="flex items-center">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white ${step.completed ? 'bg-green-500' : 'bg-gray-300'}`}>
+                  <div key={step.status} className='flex items-center'>
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center text-white ${
+                        step.completed ? 'bg-green-500' : 'bg-gray-300'
+                      }`}
+                    >
                       {step.icon}
                     </div>
-                    <span className="ml-2 text-sm font-medium">{step.status}</span>
-                    {index < 3 && <div className={`flex-1 h-1 mx-4 ${step.completed ? 'bg-green-500' : 'bg-gray-300'}`}></div>}
+                    <span className='ml-2 text-sm font-medium'>
+                      {step.status}
+                    </span>
+                    {index < 3 && (
+                      <div
+                        className={`flex-1 h-1 mx-4 ${
+                          step.completed ? 'bg-green-500' : 'bg-gray-300'
+                        }`}
+                      ></div>
+                    )}
                   </div>
                 ))}
               </div>

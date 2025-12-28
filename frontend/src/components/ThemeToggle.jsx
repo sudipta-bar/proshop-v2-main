@@ -12,7 +12,10 @@ const ThemeToggle = () => {
   };
 
   return (
-    <Nav.Link onClick={handleToggle} style={{ cursor: 'pointer', transform: 'translateX(-12px)' }}>
+    <Nav.Link
+      onClick={handleToggle}
+      style={{ cursor: 'pointer', transform: 'translateX(-12px)' }}
+    >
       {mode === 'light' ? <FaMoon /> : <FaSun />}
     </Nav.Link>
   );

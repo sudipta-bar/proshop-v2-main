@@ -9,11 +9,19 @@ import Paginate from '../components/Paginate';
 import ProductCarousel from '../components/ProductCarousel';
 import Meta from '../components/Meta';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory, setMinPrice, setMaxPrice, setRating, clearFilters } from '../slices/filterSlice';
+import {
+  setCategory,
+  setMinPrice,
+  setMaxPrice,
+  setRating,
+  clearFilters,
+} from '../slices/filterSlice';
 
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams();
-  const { category, minPrice, maxPrice, rating } = useSelector((state) => state.filter);
+  const { category, minPrice, maxPrice, rating } = useSelector(
+    (state) => state.filter
+  );
   const dispatch = useDispatch();
 
   const { data, isLoading, error } = useGetProductsQuery({
@@ -21,14 +29,15 @@ const HomeScreen = () => {
     pageNumber,
   });
 
-  const filteredProducts = data?.products?.filter((product) => {
-    const min = Math.max(category ? 0 : minPrice, 0);
-    const max = Math.max(maxPrice, min);
-    if (category && product.category !== category) return false;
-    if (product.price < min || product.price > max) return false;
-    if (rating && product.rating < parseFloat(rating)) return false;
-    return true;
-  }) || [];
+  const filteredProducts =
+    data?.products?.filter((product) => {
+      const min = Math.max(category ? 0 : minPrice, 0);
+      const max = Math.max(maxPrice, min);
+      if (category && product.category !== category) return false;
+      if (product.price < min || product.price > max) return false;
+      if (rating && product.rating < parseFloat(rating)) return false;
+      return true;
+    }) || [];
 
   const categories = [...new Set(data?.products?.map((p) => p.category) || [])];
 
@@ -101,7 +110,11 @@ const HomeScreen = () => {
               </Form.Select>
             </Col>
             <Col md={2}>
-              <Button variant='secondary' onClick={() => dispatch(clearFilters())} className='mb-2'>
+              <Button
+                variant='secondary'
+                onClick={() => dispatch(clearFilters())}
+                className='mb-2'
+              >
                 Clear Filters
               </Button>
             </Col>
